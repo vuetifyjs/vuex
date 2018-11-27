@@ -1,0 +1,11 @@
+{
+  "name": "vuetify-vuex-cognito-module-docs",
+  "type": "static",
+  "static": {
+    "public": "docs/.vuepress/dist"
+  },
+  "alias": "cognito.vuetifyjs.com",
+  "files": [
+    "docs/.vuepress/dist"
+  ]
+}
