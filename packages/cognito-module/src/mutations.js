@@ -1,7 +1,8 @@
 // Utils
-import { set } from '../utils/vuex'
 
 export default {
-  setUser: set('user'),
-  setSession: set('session')
+  setUser: (state, user) => {
+    state.user = JSON.parse(JSON.stringify(user))
+    state.session = state.user.signInUserSession
+  }
 }
