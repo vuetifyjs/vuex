@@ -8,7 +8,7 @@ export default {
         Auth.currentUserPoolUser()
           .then(user => {
             commit('setUser', user)
-            commit('setSession', session)
+
             resolve(session)
           }).catch(reject)
       }).catch(reject)
@@ -17,9 +17,14 @@ export default {
     new Promise((resolve, reject) => {
       Auth.signIn(credentials.username, credentials.password).then((user) => {
         commit('setUser', user)
-        commit('setSession', user.signInUserSession)
 
-        if (localStorage) localStorage.setItem('USER', JSON.stringify(user))
+        resolve(user)
+      }).catch(reject)
+    }),
+  answerCustomChallenge: ({ commit }, credentials) =>
+    new Promise((resolve, reject) => {
+      Auth.sendCustomChallengeAnswer(credentials.user, credentials.answer).then((user) => {
+        commit('setUser', user)
 
         resolve(user)
       }).catch(reject)
@@ -33,9 +38,6 @@ export default {
         attributes: credentials.attributes
       }).then(user => {
         commit('setUser', user)
-        commit('setSession', user.signInUserSession)
-
-        if (localStorage) localStorage.setItem('USER', user)
 
         resolve(user)
       }).catch(reject)
@@ -77,7 +79,6 @@ export default {
       Auth.signOut()
         .then(result => {
           commit('setUser', {})
-          commit('setSession', {})
 
           resolve(result)
         })
