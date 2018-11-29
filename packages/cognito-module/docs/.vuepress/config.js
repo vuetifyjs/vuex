@@ -5,11 +5,7 @@ module.exports = {
     ['link', { rel: 'icon', href: `/logo.png` }]
   ],
 
-  plugins: [
-    ['@vuepress/google-analytics', {
-      ga: 'UA-75262397-5'
-    }]
-  ],
+  ga: 'UA-75262397-5',
 
   themeConfig: {
     nav: [
