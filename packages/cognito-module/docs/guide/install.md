@@ -24,3 +24,6 @@ attachCognitoModule(store, {
   Region: 'your-data-here'
 }, 'cognito')
 ```
+
+### Example Project
+An example project can be found [here](https://github.com/vuetifyjs/vuex-cognito-example)
