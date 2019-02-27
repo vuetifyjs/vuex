@@ -26,10 +26,10 @@ Attach cognito module to the store
 import store from './store'
 
 attachCognitoModule(store, {
-    UserPoolId: 'your-data-here',
-    IdentityPoolId: 'your-data-here',
-    ClientId: 'your-data-here',
-    Region: 'your-data-here'
+  UserPoolId: 'your-data-here',
+  IdentityPoolId: 'your-data-here',
+  ClientId: 'your-data-here',
+  Region: 'your-data-here'
 }, 'cognito')
 ```
 
@@ -47,13 +47,13 @@ Within your plugin file attach the cognito module to the store
 import attachCognitoModule from '@vuetify/vuex-cognito-module'
 
 export default (ctx, inject) => {
-    const store = ctx.store
-    attachCognitoModule(store, {
-        userPoolId: process.env.cognitoUserPool,
-        identityPoolId: process.env.identityPoolId,
-        userPoolWebClientId: process.env.cognitoClientID,
-        region: process.env.cognitoRegion
-    }, 'cognito')
+  const store = ctx.store
+  attachCognitoModule(store, {
+    userPoolId: process.env.cognitoUserPool,
+    identityPoolId: process.env.identityPoolId,
+    userPoolWebClientId: process.env.cognitoClientID,
+    region: process.env.cognitoRegion
+  }, 'cognito')
 }
 ```
 
