@@ -8,6 +8,7 @@ module.exports = {
     const hasToken = accessToken.jwtToken
     const isActive = new Date(accessToken.payload.exp * 1000) > new Date()
     const isMe = accessToken.payload.username === store.user.username
+
     return hasToken && isActive && isMe
   }
 }
