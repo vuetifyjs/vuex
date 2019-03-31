@@ -1,42 +1,65 @@
 let auth // auth object created from firebase.auth()
 
-const notImplemented = () => { console.warn('Not implemented yet') };
+const notImplemented = () => { console.warn('Not implemented yet') }
 
 export default {
   init ({ dispatch }, config) {
     auth = config
     auth.onAuthStateChanged(user => dispatch('authStateChanged', user))
+    // TODO: auth.onIdTokenChanged
   },
   /// Auth methods
   authStateChanged: ({ commit, state }, user) => {
     if (!state.init) commit('setInit')
     commit('setUser', user)
   },
-  applyActionCode: notImplemented,
-  checkActionCode: notImplemented,
+  applyActionCode: (_, code) =>
+    new Promise((resolve, reject) => {
+      auth.applyActionCode(code)
+        .then(resolve)
+        .catch(reject)
+    }),
+  checkActionCode: (_, code) =>
+    new Promise((resolve, reject) => {
+      auth.checkActionCode(code)
+        .then(resolve)
+        .catch(reject)
+    }),
   confirmPasswordReset: (_, payload) =>
     new Promise((resolve, reject) => {
       auth.confirmPasswordReset(payload.code, payload.newPassword)
         .then(resolve)
         .catch(reject)
     }),
-  createUserAndRetrieveDataWithEmailAndPassword: notImplemented,
-  createUserWithEmailAndPassword: ({ commit }) =>
+  createUserWithEmailAndPassword: ({ commit }, payload) =>
     new Promise((resolve, reject) => {
       auth.createUserWithEmailAndPassword(payload.email, payload.password)
         .then(() => {
-          const user = auth.currentUser;
+          const user = auth.currentUser
           user.sendEmailVerification()
           commit('setUser', user)
           resolve(user)
         })
         .catch(reject)
     }),
-  fetchProvidersForEmail: notImplemented,
-  fetchSignInMethodsForEmail: notImplemented,
-  getRedirectResult: notImplemented,
-  isSignInWithEmailLink: notImplemented,
-  onIdTokenChanged: notImplemented,
+  fetchSignInMethodsForEmail: (_, email) =>
+    new Promise((resolve, reject) => {
+      auth.fetchSignInMethodsForEmail(email)
+        .then(resolve)
+        .catch(reject)
+    }),
+  getRedirectResult: () =>
+    new Promise((resolve, reject) => {
+      auth.getRedirectResult()
+        .then(resolve)
+        .catch(reject)
+    }),
+  isSignInWithEmailLink: (_, emailLink) =>
+    new Promise((resolve, reject) => {
+      auth.isSignInWithEmailLink(emailLink)
+        .then(resolve)
+        .catch(reject)
+    }),
   sendPasswordResetEmail: (_, email) =>
     new Promise((resolve, reject) => {
       auth.sendPasswordResetEmail(email)
@@ -44,7 +67,12 @@ export default {
         .catch(reject)
     }),
   sendSignInLinkToEmail: notImplemented,
-  setPersistence: notImplemented,
+  setPersistence: (_, type) => {
+    if (!['session', 'local', 'none'].includes(type)) {
+      throw new Error('`type` must be one of `session`, `local`, `none`')
+    }
+    auth.setPersistence(type.toLowerCase())
+  },
   signInAndRetrieveDataWithCredential: notImplemented,
   signInAndRetrieveDataWithCustomToken: notImplemented,
   signInAndRetrieveDataWithEmailAndPassword: notImplemented,
@@ -72,13 +100,23 @@ export default {
         .catch(reject)
     }),
   updateCurrentUser: notImplemented,
-  useDeviceLanguage: notImplemented,
-  verifyPasswordResetCode: notImplemented,
+  useDeviceLanguage: () => {
+    auth.useDeviceLanguage()
+  },
+  verifyPasswordResetCode: (_, code) =>
+    new Promise((resolve, reject) => {
+      auth.verifyPasswordResetCode(code)
+        .then(resolve)
+        .catch(reject)
+    }),
 
   /// User Methods
   getIdToken: notImplemented,
   getIdTokenResult: notImplemented,
-  toJSON: notImplemented,
+  toJSON: () => {
+    const currentUser = auth.currentUser
+    return currentUser.toJSON()
+  },
   reauthenticateWithCredential: notImplemented,
   reloadUser: ({ commit }) =>
     new Promise((resolve, reject) => {
@@ -94,7 +132,7 @@ export default {
     new Promise((resolve, reject) => {
       const currentUser = auth.currentUser
       currentUser.sendEmailVerification()
-      resolve(user)
+      resolve(currentUser)
     }),
   updateEmail: notImplemented,
   updatePassword: notImplemented,
@@ -104,7 +142,7 @@ export default {
       const user = auth.currentUser
       const profileData = {}
       if (payload.photoURL) {
-        profileData.photoURL = photoURL
+        profileData.photoURL = payload.photoURL
       }
       if (payload.displayName) {
         profileData.displayName = payload.displayName
@@ -118,5 +156,5 @@ export default {
           resolve(res)
         })
         .catch(reject)
-    }),
+    })
 }

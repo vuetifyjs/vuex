@@ -1,7 +1,7 @@
 const state = () => {
   return {
     user: {},
-    init: false
+    init: false,
   }
 }
 export default state
