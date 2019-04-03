@@ -13,6 +13,12 @@ export default {
           }).catch(reject)
       }).catch(reject)
     }),
+  fetchJwtToken: ({ commit }) =>
+    new Promise((resolve, reject) => {
+      Auth.currentSession().then(session => {
+        resolve(session.getAccessToken().getJwtToken())
+      }).catch(reject)
+    }),
   signInUser: ({ commit }, credentials) =>
     new Promise((resolve, reject) => {
       Auth.signIn(credentials.username, credentials.password).then((user) => {

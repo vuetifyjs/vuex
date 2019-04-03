@@ -2,7 +2,7 @@
 
 Vuex module to interface with AWS Cognito
 
-Docs Link: Coming Soon!
+Docs Link: [https://cognito.vuetifyjs.com/](https://cognito.vuetifyjs.com/)
 
 Install:
 ```bash
