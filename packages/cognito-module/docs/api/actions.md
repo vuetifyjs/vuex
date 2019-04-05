@@ -7,6 +7,14 @@ Fetches the latest information on the current user and session state.
 this.$store.dispatch('cognito/fetchSession')
 ```
 
+### `fetchJwtToken()`
+
+Fetches the current jwtToken associated with the current user and session when available.
+
+```js
+this.$store.dispatch('cognito/fetchJwtToken')
+```
+
 ### `signInUser({ username: String, password: String })`
 Signs in an already created user and sets user obj in localstorage with `USER` key
 
