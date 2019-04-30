@@ -10,5 +10,25 @@ module.exports = {
     const isMe = accessToken.payload.username === store.user.username
 
     return hasToken && isActive && isMe
+  },
+  getSession: (store = {}) => {
+    const session = store.session
+    return session
+  },
+  getUserSub: (store = {}) => {
+    const userSub = store.user.attributes.sub
+    return userSub
+  },
+  getUsername: (store = {}) => {
+    const username = store.user.user.username
+    return username
+  },
+  getUserAttributes: (store = {}) => {
+    const attributes = store.user.attributes
+    return attributes
+  },
+  getUserGroup: (store = {}) => {
+    const groups = store.session.accessToken.payload['cognito:groups']
+    return groups
   }
 }
