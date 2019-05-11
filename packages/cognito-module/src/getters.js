@@ -12,23 +12,23 @@ module.exports = {
     return hasToken && isActive && isMe
   },
   // I find this one poetic. :)
-  getSession: (store = {}) => /* Does the */ 'session' /* key exist */ in store ? store.session : 'Could not retrieve session data.',
-  getUserSub: (store = {}) => store.user &&
+  session: (store = {}) => /* Does the */ 'session' /* key exist */ in store ? store.session : false,
+  userSub: (store = {}) => store.user &&
     store.user.attributes
     ? store.user.attributes.sub
-    : 'Could not retrieve user sub.',
-  getUsername: (store = {}) => store.user &&
+    : false,
+  username: (store = {}) => store.user &&
     store.user.user
     ? store.user.user.username
-    : 'Could not retrieve username.',
-  getUserAttributes: (store = {}) => store.user &&
+    : false,
+  userAttributes: (store = {}) => store.user &&
     store.user.attributes
     ? store.user.attributes
-    : 'Could not retrieve user attributes.',
-  getUserGroup: (store = {}) => store.session &&
+    : false,
+  userGroups: (store = {}) => store.session &&
     store.session.accessToken &&
     store.session.accessToken.payload &&
     store.session.accessToken.payload['cognito:groups']
     ? store.session.accessToken.payload['cognito:groups']
-    : 'Could not retrieve groups data.'
+    : false
 }
