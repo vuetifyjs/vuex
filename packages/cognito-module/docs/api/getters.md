@@ -6,24 +6,24 @@
 this.$store.getters['cognito/isLoggedIn']
 ```
 
-`getSession`: Getter that returns an `Object` containing the current Cognito session information in store.
+`session`: Getter that returns an `Object` containing the current Cognito session information in store.
 
 ```js
-this.$store.getters['cognito/getSession']
+this.$store.getters['cognito/session']
 ```
 
-`getUserSub`: Getter that returns a `String` which represents the current Cognito User Sub or ID in a similar format as the following: `2493bf51-ab2b-4a85-cd15-76b3a547d626`
+`userSub`: Getter that returns a `String` which represents the current Cognito User Sub or ID in a similar format as the following: `2493bf51-ab2b-4a85-cd15-76b3a547d626`
 
 ```js
-this.$store.getters['cognito/getUserSub']
+this.$store.getters['cognito/userSub']
 ```
 
-`getUsername`: Getter that returns a `String` which contains the 'username' of a register created using the `registerUser` action, this getter is to be used especially when dealing with Confirming user accounts via MFA with the following actions: `confirmUser` & `resendConfirmation`.
+`username`: Getter that returns a `String` which contains the 'username' of a register created using the `registerUser` action, this getter is to be used especially when dealing with Confirming user accounts via MFA with the following actions: `confirmUser` & `resendConfirmation`.
 
 The username returned comes in a similar format: `myuser@mydomain.com`
 
 ```js
-this.$store.getters['cognito/getUsername']
+this.$store.getters['cognito/username']
 ```
 
 Example of use 1: 
@@ -45,10 +45,10 @@ this.$store
     })
 ```
 
-`getUserAttributes`: Getter that returns an `Object` which contains all the user attributes from the current session.
+`userAttributes`: Getter that returns an `Object` which contains all the user attributes from the current session.
 
 ```js
-this.$store.getters['cognito/getUserAttributes']
+this.$store.getters['cognito/userAttributes']
 ```
 
 Example return:
@@ -66,10 +66,10 @@ Example return:
 }
 ```
 
-`getUserGroup`: Getter that returns an `Array` which contains all the groups that the current user in session belongs to. (This is used for authorizing users based on an assigned group/role)
+`userGroups`: Getter that returns an `Array` which contains all the groups that the current user in session belongs to. (This is used for authorizing users based on an assigned group/role)
 
 ```js
-this.$store.getters['cognito/getUserGroup']
+this.$store.getters['cognito/userGroups']
 ```
 
 Example return:
