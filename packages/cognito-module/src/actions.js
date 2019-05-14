@@ -95,11 +95,10 @@ export default {
   init ({ commit }, config) {
     if (![
       'userPoolId',
-      'identityPoolId',
       'userPoolWebClientId',
       'region'
     ].every(opt => Boolean(config[opt]))) {
-      throw new Error('userPoolId, identityPoolId, userPoolWebClientId and region are required in the config object.')
+      throw new Error('userPoolId, userPoolWebClientId and region are required in the config object.')
     }
 
     Amplify.configure({ Auth: config })
