@@ -8,11 +8,12 @@ module.exports = {
     const hasToken = accessToken.jwtToken
     const isActive = new Date(accessToken.payload.exp * 1000) > new Date()
     const isMe = accessToken.payload.username === store.user.username
-
     return hasToken && isActive && isMe
   },
-  // I find this one poetic. :)
-  session: (store = {}) => /* Does the */ 'session' /* key exist */ in store ? store.session : false,
+  session: (store = {}) => 'session' in store &&
+    Object.keys(store.session).length !== 0
+    ? store.session
+    : false,
   userSub: (store = {}) => store.user &&
     store.user.attributes
     ? store.user.attributes.sub
