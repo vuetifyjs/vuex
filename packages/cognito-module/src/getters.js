@@ -14,10 +14,15 @@ module.exports = {
     Object.keys(store.session).length !== 0
     ? store.session
     : false,
-  userSub: (store = {}) => store.user &&
-    store.user.attributes
-    ? store.user.attributes.sub
-    : false,
+  userSub: (store = {}) => {
+    if (store.user && store.user.attributes) {
+      return store.user.attributes.sub
+    } else if (store.user && store.user.userSub) {
+      return store.user.userSub
+    } else {
+      return false
+    }
+  },
   username: (store = {}) => store.user &&
     store.user.user
     ? store.user.user.username
