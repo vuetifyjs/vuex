@@ -2,7 +2,7 @@
 > A collection of plugins for Vuex
 
 ### 💿 Install
-Select a package bloew
+Select a package below
 
 - [cognito-module](https://github.com/vuetifyjs/vuex/tree/master/packages/cognito-module)
 
