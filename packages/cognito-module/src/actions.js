@@ -27,6 +27,14 @@ export default {
         resolve(user)
       }).catch(reject)
     }),
+  completeNewPassword: ({ state, commit }, credentials) =>
+    new Promise((resolve, reject) => {
+      Auth.completeNewPassword(credentials.user, credentials.password).then((user) => {
+        commit('setUser', user)
+
+        resolve(user)
+      }).catch(reject)
+    }),
   answerCustomChallenge: ({ commit }, credentials) =>
     new Promise((resolve, reject) => {
       Auth.sendCustomChallengeAnswer(credentials.user, credentials.answer).then((user) => {
