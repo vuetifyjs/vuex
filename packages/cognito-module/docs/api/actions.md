@@ -1,5 +1,12 @@
 # Actions
 
+
+### `fetchCurrentAuthUser()`
+Fetches the existing authenticated user cached in browser and sets user and session in store.
+```js
+this.$store.dispatch('cognito/fetchCurrentAuthUser')
+```
+
 ### `fetchSession()`
 Fetches the latest information on the current user and session state.
 
