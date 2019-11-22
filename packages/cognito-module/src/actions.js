@@ -2,6 +2,16 @@ import Auth from '@aws-amplify/auth'
 import Amplify from '@aws-amplify/core'
 
 export default {
+  fetchCurrentUser({ commit }) {
+    return new Promise((resolve, reject) => {
+      Auth.currentAuthenticatedUser()
+        .then((user) => {
+          commit('setUser', user)
+          resolve(user)
+        })
+        .catch(reject)
+    })
+  },
   fetchSession: ({ commit }) =>
     new Promise((resolve, reject) => {
       Auth.currentSession().then(session => {
