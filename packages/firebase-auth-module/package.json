@@ -1,0 +1,35 @@
+{
+  "name": "@vuetify/vuex-firebase-auth-module",
+  "version": "0.4.0",
+  "main": "dist/vuex-firebase-auth-module.umd.min.js",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build --target lib --name vuex-firebase-auth-module src/index.js",
+    "lint": "vue-cli-service lint",
+    "docs:deploy": "npm run docs:build && now --local-config docs.now.json && now alias --local-config docs.now.json",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "dependencies": {
+    "firebase": "^5.6.0"
+  },
+  "devDependencies": {
+    "@vue/babel-preset-app": "^3.0.4",
+    "@vue/cli-plugin-babel": "^3.0.4",
+    "@vue/cli-plugin-eslint": "^3.0.4",
+    "@vue/cli-service": "^3.0.4",
+    "@vue/eslint-config-standard": "^3.0.4",
+    "lint-staged": "^7.2.0",
+    "vue-template-compiler": "^2.5.17",
+    "vuepress": "^0.14.2"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  }
+}

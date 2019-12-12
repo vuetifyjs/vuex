@@ -1,0 +1,11 @@
+{
+  "name": "vuetify-vuex-firebase-auth-module-docs",
+  "type": "static",
+  "static": {
+    "public": "docs/.vuepress/dist"
+  },
+  "alias": "firebase-auth.vuetifyjs.com",
+  "files": [
+    "docs/.vuepress/dist"
+  ]
+}
